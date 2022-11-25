@@ -1,0 +1,11 @@
+.root {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--main-back);
+  box-sizing: border-box;
+  margin: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  position: relative;
+}
