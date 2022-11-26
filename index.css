@@ -3,3 +3,32 @@
 @import url(./vendor/variables.css);
 
 @import url(./blocks/root/root.css);
+
+@import url(./blocks/header/header.css);
+@import url(./blocks/header/header__title.css);
+@import url(./blocks/header/header__add-btn.css);
+
+@import url(./blocks/content/content.css);
+@import url(./blocks/content/content__message.css);
+
+@import url(./blocks/popup/popup.css);
+
+@import url(./blocks/card/card.css);
+@import url(./blocks/card/__side/card__side.css);
+@import url(./blocks/card/__side/_type/card__side_type_front.css);
+@import url(./blocks/card/__side/_type/card__side_type_back.css);
+@import url(./blocks/card/card__bank-logo.css);
+@import url(./blocks/card/card__number.css);
+@import url(./blocks/card/card__number-item.css);
+@import url(./blocks/card/card__valid.css);
+@import url(./blocks/card/card__label.css);
+@import url(./blocks/card/card.css);
+@import url(./blocks/card/card__valid-date.css);
+@import url(./blocks/card/card__valid-date-item.css);
+@import url(./blocks/card/card__block.css);
+@import url(./blocks/card/card__holder.css);
+@import url(./blocks/card/card__holder-name.css);
+@import url(./blocks/card/card__holder-name-item.css);
+@import url(./blocks/card/card__payment-system-logo.css);
+@import url(./blocks/card/card__black-line.css);
+@import url(./blocks/card/card__cvv.css);

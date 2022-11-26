@@ -10,7 +10,92 @@
 </head>
 
 <body class="root">
+  <header class="header">
+    <h1 class="header__title">Wallet</h1>
+    <button class="header__add-btn" type="button" aria-label="card adding"></button>
+  </header>
+
+  <main class="content">
+    <!-- <p class="content__message">Your wallet is&nbsp;still empty.</p> -->
+    <section class="cards">
+      <ul class="cards__list">
+
+      </ul>
+    </section>
+  </main>
+  <div class="popup">
+    <div class="card">
+      <div class="card__side card__side_type_front">
+        <img class="card__bank-logo" src="./node_modules/card-info/dist/banks-logos/ru-sberbank.svg" alt="Sberbank">
+
+        <p class="card__number">
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+        </p>
+
+        <div class="card__valid">
+          <p class="card__label">valid<br>thru</p>
+          <p class="card__valid-date">
+            <span class="card__valid-date-item">MM</span> /
+            <span class="card__valid-date-item">YY</span>
+          </p>
+        </div>
+
+        <div class="card__block">
+          <div class="card__holder">
+            <p class="card__label">card holder</p>
+            <p class="card__holder-name">full name</p>
+          </div>
+
+          <img class="card__payment-system-logo" src="./node_modules/card-info/dist/brands-logos/mir-white.svg"
+            alt="Mir">
+        </div>
+      </div>
+
+      <div class="card__side card__side_type_back">
+        <div class="card__black-line"></div>
+        <p class="card__label">cvv</p>
+        <p class="card__cvv"></p>
+
+        <div class="card__block">
+          <img class="card__bank-logo" src="./node_modules/card-info/dist/banks-logos/ru-alfa.svg" alt="#">
+          <img class="card__payment-system-logo"
+            src="./node_modules/card-info/dist/brands-logos/master-card-colored.svg" alt="#">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <template id="holder-name">
+    <span class="card__holder-name-item"></span>
+  </template>
+
+  <template>
+    <li>
+
+    </li>
+  </template>
+  <script src="./node_modules/card-info/dist/card-info.min.js"></script>
   <script src="./scripts/index.js" type="module"></script>
+
 </body>
 
 </html>

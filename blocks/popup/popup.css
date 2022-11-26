@@ -1,0 +1,14 @@
+.popup {
+  width: 80%;
+  max-width: 1280px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+  .popup {
+    width: calc(100% - 40px);
+  }
+}

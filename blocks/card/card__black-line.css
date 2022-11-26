@@ -1,0 +1,14 @@
+.card__black-line {
+  width: calc(100% + 30px);
+  height: 50px;
+  background-color: black;
+  margin-left: -15px;
+  margin-bottom: 40px;
+}
+
+@media screen and (max-width: 500px) {
+  .card__black-line {
+    height: 35px;
+    margin-bottom: 28px;
+  }
+}

@@ -1,0 +1,11 @@
+.card__side_type_back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: perspective(2000px) rotateY(-180deg);
+  z-index: 2;
+}
+
+.card_rotated .card__side_type_back {
+  transform: perspective(1000px) rotateY(0deg);
+}

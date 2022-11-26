@@ -1,0 +1,7 @@
+.header__title {
+  font-size: 40px;
+  font-weight: 800;
+  margin: 0;
+  color: var(--main-dark);
+  text-transform: uppercase;
+}

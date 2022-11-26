@@ -1,0 +1,14 @@
+.card__valid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto 20px;
+  width: max-content;
+}
+
+@media screen and (max-width: 500px) {
+  .card__valid {
+    margin-bottom: 7px;
+  }
+}

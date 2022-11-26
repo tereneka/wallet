@@ -1,0 +1,9 @@
+.card__payment-system-logo {
+  height: 40px;
+}
+
+@media screen and (max-width: 500px) {
+  .card__payment-system-logo {
+    height: 30px;
+  }
+}

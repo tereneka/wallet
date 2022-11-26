@@ -1,0 +1,27 @@
+.card__side {
+  width: 430px;
+  height: 270px;
+  padding: 25px 15px;
+  box-sizing: border-box;
+  background-color: var(--accent);
+  background-image: linear-gradient(
+    130deg,
+    rgb(60, 60, 60),
+    rgb(134, 125, 125, 0.2)
+  );
+  border-radius: 16px;
+  color: var(--main-light);
+  text-shadow: 7px 6px 10px rgb(10, 66, 112, 0.8);
+  box-shadow: 7px 6px 10px rgb(60, 60, 60, 0.8);
+  transform: perspective(2000px) rotateY(0deg);
+  transform-style: preserve-3d;
+  transition: all 0.8s cubic-bezier(0.71, 0.03, 0.56, 0.85);
+  backface-visibility: hidden;
+}
+
+@media screen and (max-width: 500px) {
+  .card__side {
+    width: 310px;
+    height: 220px;
+  }
+}

@@ -1,0 +1,13 @@
+.card__number-item:nth-of-type(4),
+.card__number-item:nth-of-type(8),
+.card__number-item:nth-of-type(12) {
+  margin-right: 20px;
+}
+
+@media screen and (max-width: 500px) {
+  .card__number-item:nth-of-type(4),
+  .card__number-item:nth-of-type(8),
+  .card__number-item:nth-of-type(12) {
+    margin-right: 16px;
+  }
+}
