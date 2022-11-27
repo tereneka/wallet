@@ -1,0 +1,17 @@
+.card__focus {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid var(--main-light);
+  border-radius: 4px;
+  transition: all 0.4s cubic-bezier(0.71, 0.03, 0.56, 0.85);
+  opacity: 0;
+  padding: 10px;
+}
+
+.card__focus_active {
+  opacity: 0.5;
+  z-index: 10;
+}

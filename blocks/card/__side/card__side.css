@@ -15,8 +15,10 @@
   box-shadow: 7px 6px 10px rgb(60, 60, 60, 0.8);
   transform: perspective(2000px) rotateY(0deg);
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transition: all 0.8s cubic-bezier(0.71, 0.03, 0.56, 0.85);
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 @media screen and (max-width: 500px) {

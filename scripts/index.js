@@ -10,21 +10,47 @@ let bankNum = 4377730000000000;
 // console.log(cardInfo.backgroundColor);
 
 const card = document.querySelector(".card");
+const cardFocus = card.querySelector(".card__focus");
 const cardSides = card.querySelectorAll(".card__side");
 const cardBankLogo = card.querySelector(".card__bank-logo");
 const cardPaymentLogo = card.querySelector(".card__payment-system-logo");
+const cardBlockLogos = card.querySelector(".card__block_for_logos");
 const cardBlackLine = card.querySelector(".card__black-line");
-// const cardNumber = card.querySelector(".card__number");
+const cardNumber = card.querySelector(".card__number");
+const cardValid = card.querySelector(".card__valid");
+const cardHolder = card.querySelector(".card__holder");
+const cardCvv = card.querySelector(".card__cvv");
+
+const rotaryElements = [
+  cardBankLogo,
+  cardPaymentLogo,
+  cardBlockLogos,
+  cardBlackLine,
+];
+const focusingElements = [cardNumber, cardValid, cardHolder, cardCvv];
 // const cardNumberChildren = Array.from(cardNumber.children);
-// const cardValid = card.querySelector(".card__valid");
 // const cardValidChildren = Array.from(cardValid.children);
-// const cardHolder = card.querySelector(".card__holder");
 // const cardHolderChildren = Array.from(cardHolder.children);
-// const cardCvv = card.querySelector(".card__cvv");
 // const cardCvvChildren = Array.from(cardCvv.children);
+
+function focusCardElement(element) {
+  cardFocus.classList.add("card__focus_active");
+  cardFocus.style.cssText = `
+  width: ${element.clientWidth}px;
+  height: ${element.clientHeight}px;
+  top: ${element.offsetTop - 10}px;
+  left: ${element.offsetLeft - 10}px;
+  `;
+}
+
+function removeFocus() {
+  cardFocus.classList.remove("card__focus_active");
+  cardFocus.style.cssText = "";
+}
 
 function rotateCard() {
   card.classList.toggle("card_rotated");
+  removeFocus();
 }
 
 cardSides.forEach((element) => {
@@ -35,6 +61,11 @@ cardSides.forEach((element) => {
   });
 });
 
-[(cardBankLogo, cardPaymentLogo, cardBlackLine)].forEach((element) => {
+rotaryElements.forEach((element) => {
   element.addEventListener("click", rotateCard);
 });
+
+focusingElements.forEach((element) => {
+  element.addEventListener("click", () => focusCardElement(element));
+});
+// cardNumber.addEventListener("click", () => focusCardElement(cardNumber));
