@@ -1,0 +1,11 @@
+.popup__form-fields-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 500px) {
+  .popup__form-fields-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

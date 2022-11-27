@@ -9,6 +9,8 @@ let bankNum = 4377730000000000;
 // console.log(cardInfo.brandLogo);
 // console.log(cardInfo.backgroundColor);
 
+const btnPopup = document.querySelector(".header__popup-btn");
+const popup = document.querySelector(".popup");
 const card = document.querySelector(".card");
 const cardFocus = card.querySelector(".card__focus");
 const cardSides = card.querySelectorAll(".card__side");
@@ -53,6 +55,11 @@ function rotateCard() {
   removeFocus();
 }
 
+btnPopup.addEventListener("click", () => {
+  btnPopup.classList.toggle("header__popup-btn_open");
+  popup.classList.toggle("popup_closed");
+});
+
 cardSides.forEach((element) => {
   element.addEventListener("click", (e) => {
     if (e.target == e.currentTarget) {
@@ -68,4 +75,3 @@ rotaryElements.forEach((element) => {
 focusingElements.forEach((element) => {
   element.addEventListener("click", () => focusCardElement(element));
 });
-// cardNumber.addEventListener("click", () => focusCardElement(cardNumber));

@@ -1,5 +1,7 @@
 :root {
   --main-light: rgb(250, 250, 250);
+  --additional-light: rgb(200, 200, 200);
   --main-dark: rgb(60, 60, 60);
   --accent: rgb(10, 66, 112);
+  --focus: rgb(50, 150, 230);
 }

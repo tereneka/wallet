@@ -1,8 +1,14 @@
 .header {
   width: 80%;
-  margin: 40px auto;
+  margin: 20px auto;
   max-width: 1280px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    margin: 0 auto;
+  }
 }

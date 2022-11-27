@@ -6,15 +6,25 @@
 
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/header__title.css);
-@import url(./blocks/header/header__add-btn.css);
+@import url(./blocks/header/header__popup-btn.css);
 
 @import url(./blocks/content/content.css);
 @import url(./blocks/content/content__message.css);
 
 @import url(./blocks/popup/popup.css);
+@import url(./blocks/popup/popup__form-container.css);
+@import url(./blocks/popup/popup__form.css);
+@import url(./blocks/popup/popup__form-label.css);
+@import url(./blocks/popup/popup__form-fields-container.css);
+@import url(./blocks/popup/__form-field/popup__form-field.css);
+@import url(./blocks/popup/__form-field/_size/popup__form-field_size_l.css);
+@import url(./blocks/popup/__form-field/_size/popup__form-field_size_s.css);
+@import url(./blocks/popup/popup__form-fieldset.css);
+@import url(./blocks/popup/popup__form-btn.css);
 
 @import url(./blocks/card/card.css);
-@import url(./blocks/card/card__focus.css);
+@import url(./blocks/card/__focus/card__focus.css);
+@import url(./blocks/card/__focus/card__focus_active.css);
 @import url(./blocks/card/__side/card__side.css);
 @import url(./blocks/card/__side/_type/card__side_type_front.css);
 @import url(./blocks/card/__side/_type/card__side_type_back.css);

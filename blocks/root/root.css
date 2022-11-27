@@ -1,6 +1,6 @@
 .root {
   font-family: "Poppins", sans-serif;
-  background-color: var(--main-light);
+  background-color: var(--additional-light);
   box-sizing: border-box;
   margin: auto;
   -webkit-font-smoothing: antialiased;
