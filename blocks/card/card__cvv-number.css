@@ -1,0 +1,18 @@
+.card__cvv-number {
+  height: 40px;
+  background-color: var(--main-light);
+  color: var(--main-dark);
+  margin: 10px 0 30px;
+  padding: 10px;
+  text-align: right;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 500px) {
+  .card__cvv-number {
+    height: 28px;
+    padding: 0 10px;
+    margin-bottom: 20px;
+  }
+}

@@ -4,15 +4,11 @@
   background-color: var(--main-dark);
   border: none;
   border-radius: 50%;
-  background-image: url(../../images/icons/plus.svg);
+  background-image: url(../../../images/icons/plus.svg);
   background-size: 30px;
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
   transform: rotateZ(45deg);
   transition: all 0.8s ease-in-out;
-}
-
-.header__popup-btn_open {
-  transform: rotateZ(0deg);
 }

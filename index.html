@@ -27,10 +27,10 @@
     <div class="card">
       <div class="card__focus"></div>
 
-      <div class="card__side card__side_type_front">
+      <div class="card__side card__side_type_front card__side_visible">
         <img class="card__bank-logo" src="./node_modules/card-info/dist/banks-logos/ru-sberbank.svg" alt="Sberbank">
 
-        <p class="card__number">
+        <p class="card__number" data-focus="cardNumber">
           <span class="card__number-item">#</span>
           <span class="card__number-item">#</span>
           <span class="card__number-item">#</span>
@@ -52,7 +52,7 @@
           <span class="card__number-item">#</span>
         </p>
 
-        <div class="card__valid">
+        <div class="card__valid" data-focus="cardValid">
           <p class="card__label">valid<br>thru</p>
           <p class="card__valid-date">
             <span class="card__valid-date-item">MM</span> /
@@ -61,7 +61,7 @@
         </div>
 
         <div class="card__block">
-          <div class="card__holder">
+          <div class="card__holder" data-focus="cardHolder">
             <p class="card__label">card holder</p>
             <p class="card__holder-name">full name</p>
           </div>
@@ -73,8 +73,11 @@
 
       <div class="card__side card__side_type_back">
         <div class="card__black-line"></div>
-        <p class="card__label">cvv</p>
-        <p class="card__cvv"></p>
+
+        <div class="card__cvv" data-focus="cardCvv">
+          <p class="card__label">cvv</p>
+          <p class="card__cvv-number"></p>
+        </div>
 
         <div class="card__block card__block_for_logos">
           <img class="card__bank-logo" src="./node_modules/card-info/dist/banks-logos/ru-alfa.svg" alt="#">
@@ -88,21 +91,22 @@
       <form class="popup__form" name="cardAdd" method="post">
         <label class="popup__form-label">
           number
-          <input class="popup__form-field popup__form-field_size_l" type="text" name="cardNumber" minlength="16"
-            maxlength="16" required inputmode="numeric"
+          <input class="popup__form-field popup__form-field_size_l" type="text" data-focus="cardNumber"
+            name="cardNumber" minlength="16" maxlength="16" required inputmode="numeric"
             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
         </label>
 
         <label class="popup__form-label">
           full name
-          <input class="popup__form-field popup__form-field_size_l" type="text" name="cardHolder" required>
+          <input class="popup__form-field popup__form-field_size_l" type="text" data-focus="cardHolder"
+            name="cardHolder" required>
         </label>
 
         <div class="popup__form-fields-container">
           <fieldset class="popup__form-fieldset">
             <legend class="popup__form-label">valid thru</legend>
 
-            <select class="popup__form-field popup__form-field_size_s" name="cardMonth" required>
+            <select class="popup__form-field popup__form-field_size_s" data-focus="cardValid" name="cardMonth" required>
               <option value="" disabled selected>month</option>
               <option value="01">01</option>
               <option value="02">02</option>
@@ -118,7 +122,7 @@
               <option value="12">12</option>
             </select>
 
-            <select class="popup__form-field popup__form-field_size_s" name="cardYear" required>
+            <select class="popup__form-field popup__form-field_size_s" data-focus="cardValid" name="cardYear" required>
               <option value="" disabled selected>year</option>
               <option value="2022">2022</option>
               <option value="2023">2023</option>
@@ -136,8 +140,8 @@
 
           <label class="popup__form-label">
             cvv<br>
-            <input class="popup__form-field popup__form-field_size_s" type="password" name="cardCvv" minlength="3"
-              maxlength="3" required inputmode="numeric">
+            <input class="popup__form-field popup__form-field_size_s" type="password" data-focus="cardCvv"
+              name="cardCvv" minlength="3" maxlength="3" required inputmode="numeric">
           </label>
         </div>
 
