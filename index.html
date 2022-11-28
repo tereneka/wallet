@@ -141,7 +141,8 @@
           <label class="popup__form-label">
             cvv<br>
             <input class="popup__form-field popup__form-field_size_s" type="password" data-focus="cardCvv"
-              name="cardCvv" minlength="3" maxlength="3" required inputmode="numeric">
+              name="cardCvv" minlength="3" maxlength="3" required inputmode="numeric"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
           </label>
         </div>
 
@@ -151,7 +152,7 @@
 
   </div>
 
-  <template id="holder-name">
+  <template id="holder-name-item">
     <span class="card__holder-name-item"></span>
   </template>
 

@@ -1,2 +1,9 @@
 .card__valid-date-item {
+  min-width: 40px;
+  text-align: center;
+  animation: moveDown 0.4s ease-in-out 1;
+}
+
+.card__valid-date-item_active {
+  animation: moveUp 0.4s ease-in-out 1;
 }

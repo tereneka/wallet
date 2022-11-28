@@ -7,4 +7,5 @@
   text-overflow: ellipsis;
   text-transform: uppercase;
   margin: 10px 0 0;
+  display: flex;
 }

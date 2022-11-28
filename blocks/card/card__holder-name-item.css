@@ -1,2 +1,15 @@
+@keyframes add {
+  from {
+    transform: translateX(10px) rotate(30deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) rotate(0);
+    opacity: 1;
+  }
+}
+
 .card__holder-name-item {
+  min-width: 5px;
+  animation: add 0.4s ease-in-out 1;
 }

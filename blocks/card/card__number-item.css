@@ -1,3 +1,31 @@
+@keyframes moveUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+}
+
+@keyframes moveDown {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.card__number-item {
+  min-width: 17.5px;
+  text-align: center;
+  animation: moveDown 0.4s ease-in-out 1;
+}
+
 .card__number-item:nth-of-type(4),
 .card__number-item:nth-of-type(8),
 .card__number-item:nth-of-type(12) {
@@ -5,9 +33,16 @@
 }
 
 @media screen and (max-width: 500px) {
+  .card__number-item {
+    min-width: 14px;
+  }
   .card__number-item:nth-of-type(4),
   .card__number-item:nth-of-type(8),
   .card__number-item:nth-of-type(12) {
-    margin-right: 16px;
+    margin-right: 12px;
   }
+}
+
+.card__number-item_active {
+  animation: moveUp 0.4s ease-in-out 1;
 }
