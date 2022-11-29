@@ -1,0 +1,32 @@
+@keyframes moveUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+}
+
+@keyframes moveDown {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes add {
+  from {
+    transform: translateX(10px) rotate(30deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) rotate(0);
+    opacity: 1;
+  }
+}

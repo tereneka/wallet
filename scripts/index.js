@@ -1,13 +1,4 @@
-let bankNum = 4377730000000000;
-
-// const cardInfo = new CardInfo(bankNum, {
-//   banksLogosPath: "./node_modules/card-info/dist/banks-logos/",
-//   brandsLogosPath: "./node_modules/card-info/dist/brands-logos/",
-// });
-// console.log("Название банка:", cardInfo.bankName);
-// console.log("Логотип банка:", cardInfo.bankLogo);
-// console.log(cardInfo.brandLogo);
-// console.log(cardInfo.backgroundColor);
+// let bankNum = 4377730000000000;
 
 const btnPopup = document.querySelector(".header__popup-btn");
 const popup = document.querySelector(".popup");
@@ -15,8 +6,8 @@ const popup = document.querySelector(".popup");
 const card = popup.querySelector(".card");
 const cardFocus = card.querySelector(".card__focus");
 const cardSides = card.querySelectorAll(".card__side");
-const cardBankLogo = card.querySelector(".card__bank-logo");
-const cardPaymentLogo = card.querySelector(".card__payment-system-logo");
+const cardBankLogos = card.querySelectorAll(".card__bank-logo");
+const cardPaymentLogos = card.querySelectorAll(".card__payment-system-logo");
 const cardBlockLogos = card.querySelector(".card__block_for_logos");
 const cardBlackLine = card.querySelector(".card__black-line");
 const cardNumber = card.querySelector(".card__number");
@@ -38,6 +29,7 @@ const inputCardHolder = form.querySelector("[name='cardHolder']");
 const selectCardMonth = form.querySelector("[name='cardMonth']");
 const selectCardYear = form.querySelector("[name='cardYear']");
 const inputCardCvv = form.querySelector("[name='cardCvv']");
+const btnFormReset = form.querySelector(".popup__form-btn_type_reset");
 const formFields = [
   inputCardNumber,
   inputCardHolder,
@@ -47,8 +39,8 @@ const formFields = [
 ];
 
 const rotaryElements = [
-  cardBankLogo,
-  cardPaymentLogo,
+  ...cardBankLogos,
+  ...cardPaymentLogos,
   cardBlockLogos,
   cardBlackLine,
 ];
@@ -124,10 +116,66 @@ function createNameItem(letter) {
   return cardHolderNameItem;
 }
 
+// function setDefaultCardBankInfo() {
+//   cardBankLogos.forEach((logo) => {
+//     logo.src = "./node_modules/card-info/dist/banks-logos/ru-sberbank.svg";
+//     logo.alt = "Sberbank";
+//   });
+
+//   cardPaymentLogos.forEach((logo) => {
+//     logo.src = "./node_modules/card-info/dist/brands-logos/visa-white.svg";
+//     logo.alt = "Visa";
+//   });
+// }
+
+function identifyBank(num) {
+  let userCardNum = num.length > 5 ? +num : 481776;
+  const cardInfo = new CardInfo(userCardNum, {
+    banksLogosPath: "./node_modules/card-info/dist/banks-logos/",
+    brandsLogosPath: "./node_modules/card-info/dist/brands-logos/",
+  });
+
+  cardBankLogos.forEach((logo) => {
+    logo.src = cardInfo.bankLogo
+      ? cardInfo.bankLogo
+      : "./node_modules/card-info/dist/banks-logos/ru-sberbank.svg";
+    logo.alt = cardInfo.bankName ? cardInfo.bankName : "Sberbank";
+  });
+
+  cardPaymentLogos.forEach((logo) => {
+    logo.src = cardInfo.brandLogo
+      ? cardInfo.brandLogo
+      : "./node_modules/card-info/dist/brands-logos/visa-white.svg";
+    logo.alt = cardInfo.brandName ? cardInfo.brandName : "Visa";
+  });
+}
+
+function resetPopupInfo() {
+  cardNumberItems.forEach((i) => (i.textContent = "#"));
+  cardValidDateItems[0].textContent = "mm";
+  cardValidDateItems[1].textContent = "yy";
+  cardHolderName.textContent = "full name";
+  cardCvvNumber.textContent = "";
+  cardBankLogos.forEach((logo) => {
+    logo.src = "./node_modules/card-info/dist/banks-logos/ru-sberbank.svg";
+    logo.alt = "Sberbank";
+  });
+
+  cardPaymentLogos.forEach((logo) => {
+    logo.src = "./node_modules/card-info/dist/brands-logos/visa-white.svg";
+    logo.alt = "Visa";
+  });
+  form.reset();
+}
+
 btnPopup.addEventListener("click", () => {
   togglePopup();
-  removeFocus();
-  setDefaultCardSide();
+
+  setTimeout(() => {
+    removeFocus();
+    setDefaultCardSide();
+    resetPopupInfo();
+  }, 800);
 });
 
 cardSides.forEach((element) => {
@@ -161,7 +209,8 @@ inputCardNumber.addEventListener("input", (e) => {
   let inputValue = e.target.value;
   let indexForAdd = inputValue.length - 1;
   let indexForRemove = inputValue.length > 0 ? inputValue.length : 0;
-
+  console.log(e, inputValue);
+  identifyBank(inputValue);
   parseInt(e.data)
     ? cardNumberItems[indexForAdd].classList.add("card__number-item_active")
     : cardNumberItems[indexForRemove].classList.add("card__number-item_active");
@@ -217,3 +266,5 @@ inputCardHolder.addEventListener("input", (e) => {
 inputCardCvv.addEventListener("input", (e) => {
   cardCvvNumber.textContent = e.target.value.replace(/[\s\S]/g, "*");
 });
+
+btnFormReset.addEventListener("click", resetPopupInfo);

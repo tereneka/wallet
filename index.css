@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
 
 @import url(./vendor/variables.css);
+@import url(./vendor/keyframes.css);
 
 @import url(./blocks/root/root.css);
 
@@ -22,6 +23,7 @@
 @import url(./blocks/popup/__form-field/_size/popup__form-field_size_l.css);
 @import url(./blocks/popup/__form-field/_size/popup__form-field_size_s.css);
 @import url(./blocks/popup/popup__form-fieldset.css);
+@import url(./blocks/popup/popup__btn-group.css);
 @import url(./blocks/popup/popup__form-btn.css);
 
 @import url(./blocks/card/card.css);

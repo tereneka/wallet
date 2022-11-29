@@ -1,8 +1,7 @@
 .popup__form-btn {
-  width: 100%;
+  width: 45%;
   height: 50px;
   padding: 5px 15px;
-  margin-top: 20px;
   box-sizing: border-box;
   background-color: var(--accent);
   color: var(--main-light);
