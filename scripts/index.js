@@ -207,25 +207,23 @@ popup.addEventListener("click", (e) => {
 // события для инпутов формы
 inputCardNumber.addEventListener("input", (e) => {
   let inputValue = e.target.value;
-  let indexForAdd = inputValue.length - 1;
-  let indexForRemove = inputValue.length > 0 ? inputValue.length : 0;
-  console.log(e, inputValue);
-  identifyBank(inputValue);
-  parseInt(e.data)
-    ? cardNumberItems[indexForAdd].classList.add("card__number-item_active")
-    : cardNumberItems[indexForRemove].classList.add("card__number-item_active");
+  let cardNumberArr = Array.from(cardNumberItems);
 
-  setTimeout(() => {
-    if (parseInt(e.data)) {
-      cardNumberItems[indexForAdd].textContent = inputValue[indexForAdd];
-      cardNumberItems[indexForAdd].classList.remove("card__number-item_active");
-    } else {
-      cardNumberItems[indexForRemove].textContent = "#";
-      cardNumberItems[indexForRemove].classList.remove(
-        "card__number-item_active"
-      );
+  identifyBank(inputValue);
+
+  cardNumberArr.map((n, index, arr) => {
+    if (
+      n.textContent !== inputValue[index] &&
+      (inputValue[index] ||
+        (e.inputType === "deleteContentBackward" && n.textContent !== "#"))
+    ) {
+      n.classList.add("card__number-item_active");
+      setTimeout(() => {
+        n.textContent = inputValue[index] ? inputValue[index] : "#";
+        n.classList.remove("card__number-item_active");
+      }, 200);
     }
-  }, 200);
+  });
 });
 
 [selectCardMonth, selectCardYear].forEach((select, index) => {
@@ -246,18 +244,31 @@ inputCardNumber.addEventListener("input", (e) => {
 
 inputCardHolder.addEventListener("input", (e) => {
   let inputValue = e.target.value;
-  let index = inputValue.length - 1;
   let nameItem;
+  let cardNameArr = Array.from(
+    cardHolderName.querySelectorAll(".card__holder-name-item")
+  ).map((i) => i.textContent);
 
-  if (inputValue.length === 1 && e.data) {
+  if (inputValue.length > 0 && cardHolderName.textContent === "full name") {
     cardHolderName.textContent = "";
   }
 
-  if (e.data) {
-    nameItem = createNameItem(inputValue[index]);
-    cardHolderName.append(nameItem);
-  } else if (!e.data && inputValue.length !== 0) {
-    cardHolderName.removeChild(cardHolderName.lastChild);
+  if (e.inputType !== "deleteContentBackward") {
+    for (let i = 0; i < inputValue.length; i++) {
+      if (cardNameArr[i] !== inputValue[i]) {
+        nameItem = createNameItem(inputValue[i]);
+        cardHolderName.append(nameItem);
+      }
+    }
+  } else if (
+    e.inputType === "deleteContentBackward" &&
+    inputValue.length !== 0
+  ) {
+    cardNameArr.forEach((letter, index) => {
+      if (letter !== inputValue[index]) {
+        cardHolderName.removeChild(cardHolderName.lastChild);
+      }
+    });
   } else {
     cardHolderName.textContent = "full name";
   }
