@@ -1,0 +1,14 @@
+.wallet {
+  width: 430px;
+  margin: auto;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 500px) {
+  .wallet {
+    width: 310px;
+  }
+}

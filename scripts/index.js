@@ -1,7 +1,8 @@
 // let bankNum = 4377730000000000;
-
 const btnPopup = document.querySelector(".header__popup-btn");
 const popup = document.querySelector(".popup");
+const content = document.querySelector(".content");
+let randomInt = getRandomInt(1, 5);
 
 const card = popup.querySelector(".card");
 const cardFocus = card.querySelector(".card__focus");
@@ -22,6 +23,8 @@ const cardHolderName = cardHolder.querySelector(".card__holder-name");
 const templateCardHolder = document.querySelector("#holder-name-item").content;
 const cardCvv = card.querySelector(".card__cvv");
 const cardCvvNumber = cardCvv.querySelector(".card__cvv-number");
+
+const wallet = document.querySelector(".wallet");
 
 const form = popup.querySelector(".popup__form");
 const inputCardNumber = form.querySelector("[name='cardNumber']");
@@ -46,17 +49,36 @@ const rotaryElements = [
 ];
 const focusableCardElements = [cardNumber, cardValid, cardHolder, cardCvv];
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
+}
+
 function togglePopup() {
   btnPopup.classList.toggle("header__popup-btn_open");
   popup.classList.toggle("popup_closed");
+  content.classList.toggle("content_closed");
 }
 
-function toggleCardSide() {
+function changeCardSidesBack() {
+  randomInt = getRandomInt(1, 5);
+  cardSides.forEach((element) => {
+    element.style.backgroundImage = `url(./images/back/back${randomInt}.png)`;
+  });
+}
+
+function toggleCardSide(card, cardSides) {
   card.classList.toggle("card_rotated");
   cardSides.forEach((side) => side.classList.toggle("card__side_visible"));
 }
 
-function setDefaultCardSide() {
+function rotateCard() {
+  toggleCardSide(card, cardSides);
+  removeFocus();
+}
+
+function setDefaultCardSide(card, cardSides) {
   card.classList.remove("card_rotated");
   cardSides[0].classList.add("card__side_visible");
   cardSides[1].classList.remove("card__side_visible");
@@ -66,7 +88,7 @@ function moveCardFocus(element) {
   if (
     !element.closest(".card__side").classList.contains("card__side_visible")
   ) {
-    toggleCardSide();
+    toggleCardSide(card, cardSides);
   }
 
   cardFocus.classList.add("card__focus_active");
@@ -103,11 +125,6 @@ function focusFormField(field) {
   moveCardFocus(cardElement);
 }
 
-function rotateCard() {
-  toggleCardSide();
-  removeFocus();
-}
-
 function createNameItem(letter) {
   const cardHolderNameItem = templateCardHolder
     .cloneNode(true)
@@ -116,23 +133,12 @@ function createNameItem(letter) {
   return cardHolderNameItem;
 }
 
-// function setDefaultCardBankInfo() {
-//   cardBankLogos.forEach((logo) => {
-//     logo.src = "./node_modules/card-info/dist/banks-logos/ru-sberbank.svg";
-//     logo.alt = "Sberbank";
-//   });
-
-//   cardPaymentLogos.forEach((logo) => {
-//     logo.src = "./node_modules/card-info/dist/brands-logos/visa-white.svg";
-//     logo.alt = "Visa";
-//   });
-// }
-
 function identifyBank(num) {
   let userCardNum = num.length > 5 ? +num : 481776;
   const cardInfo = new CardInfo(userCardNum, {
     banksLogosPath: "./node_modules/card-info/dist/banks-logos/",
     brandsLogosPath: "./node_modules/card-info/dist/brands-logos/",
+    brandLogoPolicy: "white",
   });
 
   cardBankLogos.forEach((logo) => {
@@ -168,18 +174,65 @@ function resetPopupInfo() {
   form.reset();
 }
 
+function cloneCard() {
+  const cloneCard = document.importNode(card, true);
+  const cloneCardSides = cloneCard.querySelectorAll(".card__side");
+  const cloneCardFocus = cloneCard.querySelector(".card__focus");
+  const btnTrash = document.createElement("button");
+
+  setDefaultCardSide(cloneCard, cloneCardSides);
+
+  cloneCardFocus.remove();
+
+  cloneCard.classList = "card wallet__card wallet__card_active";
+
+  btnTrash.className = "card__btn-trash";
+  btnTrash.type = "button";
+  btnTrash.ariaLabel = "remove card";
+  btnTrash.addEventListener("click", () => {
+    btnTrash.closest(".card").remove();
+  });
+  cloneCardSides[0].prepend(btnTrash);
+
+  cloneCardSides.forEach((side) => {
+    side.addEventListener("click", () =>
+      toggleCardSide(cloneCard, cloneCardSides)
+    );
+  });
+
+  return cloneCard;
+}
+
+function submitForm(e) {
+  e.preventDefault();
+  removeFocus();
+  setDefaultCardSide(card, cardSides);
+  togglePopup();
+
+  setTimeout(() => {
+    resetPopupInfo();
+    changeCardSidesBack();
+  }, 800);
+
+  wallet.prepend(cloneCard());
+}
+
 btnPopup.addEventListener("click", () => {
   togglePopup();
 
   setTimeout(() => {
     removeFocus();
-    setDefaultCardSide();
+    setDefaultCardSide(card, cardSides);
     resetPopupInfo();
+    if (popup.classList.value.includes("popup_closed")) {
+      changeCardSidesBack();
+    }
   }, 800);
 });
 
-cardSides.forEach((element) => {
-  element.addEventListener("click", (e) => {
+cardSides.forEach((side) => {
+  changeCardSidesBack();
+  side.addEventListener("click", (e) => {
     if (e.target == e.currentTarget) {
       rotateCard();
     }
@@ -277,5 +330,8 @@ inputCardHolder.addEventListener("input", (e) => {
 inputCardCvv.addEventListener("input", (e) => {
   cardCvvNumber.textContent = e.target.value.replace(/[\s\S]/g, "*");
 });
+//
 
 btnFormReset.addEventListener("click", resetPopupInfo);
+
+form.addEventListener("submit", submitForm);

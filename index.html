@@ -15,18 +15,12 @@
     <button class="header__popup-btn" type="button" aria-label="card adding"></button>
   </header>
 
-  <main class="content">
-    <!-- <p class="content__message">Your wallet is&nbsp;still empty.</p> -->
-    <section class="cards">
-      <ul class="cards__list">
-
-      </ul>
-    </section>
+  <main class="content content_closed">
+    <section class="wallet"></section>
   </main>
   <div class="popup">
     <div class="card">
       <div class="card__focus"></div>
-
       <div class="card__side card__side_type_front card__side_visible">
         <img class="card__bank-logo" src="./node_modules/card-info/dist/banks-logos/ru-sberbank.svg" alt="Sberbank">
 
@@ -159,11 +153,6 @@
     <span class="card__holder-name-item"></span>
   </template>
 
-  <template>
-    <li>
-
-    </li>
-  </template>
   <script src="./node_modules/card-info/dist/card-info.min.js"></script>
   <script src="./scripts/index.js" type="module"></script>
 

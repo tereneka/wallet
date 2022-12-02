@@ -11,7 +11,9 @@
 @import url(./blocks/header/__popup-btn/header__popup-btn_open.css);
 
 @import url(./blocks/content/content.css);
-@import url(./blocks/content/content__message.css);
+
+@import url(./blocks/wallet/wallet.css);
+@import url(./blocks/wallet/wallet__card.css);
 
 @import url(./blocks/popup/popup.css);
 @import url(./blocks/popup/popup_closed.css);
@@ -48,3 +50,4 @@
 @import url(./blocks/card/card__black-line.css);
 @import url(./blocks/card/card__cvv.css);
 @import url(./blocks/card/card__cvv-number.css);
+@import url(./blocks/card/card__btn-trash.css);

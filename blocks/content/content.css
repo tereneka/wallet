@@ -1,11 +1,9 @@
 .content {
-  width: 80%;
+  width: 100%;
   max-width: 1280px;
   margin: auto;
 }
 
-@media screen and (max-width: 600px) {
-  .content {
-    width: calc(100% - 40px);
-  }
+.content_closed {
+  visibility: hidden;
 }

@@ -9,6 +9,8 @@
     rgb(60, 60, 60),
     rgb(134, 125, 125, 0.2)
   );
+  background-size: cover;
+  background-position: center;
   border-radius: 16px;
   color: var(--main-light);
   text-shadow: 7px 6px 10px rgb(10, 66, 112, 0.8);

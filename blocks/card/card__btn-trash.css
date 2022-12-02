@@ -1,0 +1,18 @@
+.card__btn-trash {
+  width: 20px;
+  height: 20px;
+  background-image: url(../../images/icons/trash.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  line-height: 0;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 1;
+}
