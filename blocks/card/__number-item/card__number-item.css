@@ -1,6 +1,7 @@
 .card__number-item {
   min-width: 17.5px;
   text-align: center;
+  display: inline-block;
   animation: moveDown 0.4s ease-in-out 1;
 }
 
@@ -19,8 +20,4 @@
   .card__number-item:nth-of-type(12) {
     margin-right: 12px;
   }
-}
-
-.card__number-item_active {
-  animation: moveUp 0.4s ease-in-out 1;
 }

@@ -2,8 +2,7 @@
   width: 100%;
   max-width: 1280px;
   margin: auto;
-}
-
-.content_closed {
-  visibility: hidden;
+  visibility: visible;
+  opacity: 1;
+  transition: all 0s;
 }

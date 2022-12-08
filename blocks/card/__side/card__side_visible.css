@@ -1,0 +1,3 @@
+.card__side_visible {
+  transform: perspective(2000px) rotateY(0deg);
+}

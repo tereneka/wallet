@@ -1,0 +1,3 @@
+.header__add-card-btn_opened {
+  transform: rotateZ(45deg);
+}

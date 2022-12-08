@@ -1,0 +1,8 @@
+.popup_opened {
+  width: 100%;
+  height: max-content;
+  min-height: 100vh;
+  visibility: visible;
+  opacity: 1;
+  animation: moveLeft 0.8s ease-in-out;
+}

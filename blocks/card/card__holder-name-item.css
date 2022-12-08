@@ -1,4 +1,6 @@
 .card__holder-name-item {
   min-width: 5px;
+  text-align: center;
+  display: inline-block;
   animation: add 0.4s ease-in-out 1;
 }

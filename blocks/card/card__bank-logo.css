@@ -1,5 +1,8 @@
 .card__bank-logo {
   height: 40px;
+  width: 70%;
+  object-fit: contain;
+  object-position: left center;
 }
 
 @media screen and (max-width: 500px) {

@@ -13,13 +13,14 @@
 <body class="root">
   <header class="header">
     <h1 class="header__title">Wallet</h1>
-    <button class="header__popup-btn" type="button" aria-label="card adding"></button>
+    <button class="header__add-card-btn header__add-card-btn_opened" id="header__add-card-btn" type="button"
+      aria-label="card adding"></button>
   </header>
 
-  <main class="content content_closed">
+  <main class="content content_invisible">
     <section class="wallet"></section>
   </main>
-  <div class="popup">
+  <div class="popup popup_opened">
     <div class="card">
       <div class="card__focus"></div>
       <div class="card__side card__side_type_front card__side_visible">
@@ -87,8 +88,7 @@
         <label class="popup__form-label">
           number
           <input class="popup__form-field popup__form-field_size_l" type="text" data-focus="cardNumber"
-            name="cardNumber" minlength="16" maxlength="16" required inputmode="numeric"
-            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+            name="cardNumber" minlength="16" maxlength="16" required inputmode="numeric">
         </label>
 
         <label class="popup__form-label">
@@ -136,8 +136,7 @@
           <label class="popup__form-label">
             cvv<br>
             <input class="popup__form-field popup__form-field_size_s" type="password" data-focus="cardCvv"
-              name="cardCvv" minlength="3" maxlength="3" required inputmode="numeric"
-              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+              name="cardCvv" required minlength="3" maxlength="3" inputmode="numeric">
           </label>
         </div>
 

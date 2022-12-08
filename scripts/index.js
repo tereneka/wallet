@@ -1,39 +1,48 @@
-// let bankNum = 4377730000000000;
-const btnPopup = document.querySelector(".header__popup-btn");
-const popup = document.querySelector(".popup");
-const content = document.querySelector(".content");
-let randomInt = getRandomInt(1, 5);
+import { notRotatedElemetsClassNamesList } from "./data.js";
 
-const card = popup.querySelector(".card");
-const cardFocus = card.querySelector(".card__focus");
-const cardSides = card.querySelectorAll(".card__side");
-const cardBankLogos = card.querySelectorAll(".card__bank-logo");
-const cardPaymentLogos = card.querySelectorAll(".card__payment-system-logo");
-const cardBlockLogos = card.querySelector(".card__block_for_logos");
-const cardBlackLine = card.querySelector(".card__black-line");
-const cardNumber = card.querySelector(".card__number");
-const cardNumberItems = cardNumber.querySelectorAll(".card__number-item");
-const cardValid = card.querySelector(".card__valid");
-const cardValidDate = cardValid.querySelector(".card__valid-date");
-const cardValidDateItems = cardValidDate.querySelectorAll(
+const content = document.querySelector(".content");
+
+const btnPopupCardAdd = document.querySelector(".header__add-card-btn");
+
+const popupCardAdd = document.querySelector(".popup");
+
+const newCard = popupCardAdd.querySelector(".card");
+const newCardSides = newCard.querySelectorAll(".card__side");
+const newCardFocus = newCard.querySelector(".card__focus");
+const newCardNumber = newCard.querySelector(".card__number");
+const newCardNumberItems = Array.from(
+  newCardNumber.querySelectorAll(".card__number-item")
+);
+const newCardValid = newCard.querySelector(".card__valid");
+const newCardValidDateItems = newCardValid.querySelectorAll(
   ".card__valid-date-item"
 );
-const cardHolder = card.querySelector(".card__holder");
-const cardHolderName = cardHolder.querySelector(".card__holder-name");
+const newCardHolder = newCard.querySelector(".card__holder");
+const newCardHolderName = newCardHolder.querySelector(".card__holder-name");
 const templateCardHolder = document.querySelector("#holder-name-item").content;
-const cardCvv = card.querySelector(".card__cvv");
-const cardCvvNumber = cardCvv.querySelector(".card__cvv-number");
+const newCardCvv = newCard.querySelector(".card__cvv");
+const newCardCvvNumber = newCardCvv.querySelector(".card__cvv-number");
+const newCardBankLogos = newCard.querySelectorAll(".card__bank-logo");
+const newCardPaymentLogos = newCard.querySelectorAll(
+  ".card__payment-system-logo"
+);
+const focusableCardElements = [
+  newCardNumber,
+  newCardValid,
+  newCardHolder,
+  newCardCvv,
+];
 
-const wallet = document.querySelector(".wallet");
-
-const form = popup.querySelector(".popup__form");
-const inputCardNumber = form.querySelector("[name='cardNumber']");
-const inputCardHolder = form.querySelector("[name='cardHolder']");
-const selectCardMonth = form.querySelector("[name='cardMonth']");
-const selectCardYear = form.querySelector("[name='cardYear']");
-const inputCardCvv = form.querySelector("[name='cardCvv']");
-const btnFormReset = form.querySelector(".popup__form-btn_type_reset");
-const formFields = [
+const formCardAdd = popupCardAdd.querySelector(".popup__form");
+const inputCardNumber = formCardAdd.querySelector("[name='cardNumber']");
+const inputCardHolder = formCardAdd.querySelector("[name='cardHolder']");
+const selectCardMonth = formCardAdd.querySelector("[name='cardMonth']");
+const selectCardYear = formCardAdd.querySelector("[name='cardYear']");
+const inputCardCvv = formCardAdd.querySelector("[name='cardCvv']");
+const btnResetFormCardAdd = formCardAdd.querySelector(
+  ".popup__form-btn_type_reset"
+);
+const formCardAddFields = [
   inputCardNumber,
   inputCardHolder,
   selectCardMonth,
@@ -41,13 +50,8 @@ const formFields = [
   inputCardCvv,
 ];
 
-const rotaryElements = [
-  ...cardBankLogos,
-  ...cardPaymentLogos,
-  cardBlockLogos,
-  cardBlackLine,
-];
-const focusableCardElements = [cardNumber, cardValid, cardHolder, cardCvv];
+const wallet = document.querySelector(".wallet");
+const walletCardList = wallet.querySelectorAll(".card");
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -55,40 +59,39 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
 }
 
-function togglePopup() {
-  btnPopup.classList.toggle("header__popup-btn_open");
-  popup.classList.toggle("popup_closed");
-  content.classList.toggle("content_closed");
+function togglePopup(popup) {
+  popup.classList.toggle("popup_opened");
 }
 
-function changeCardSidesBack() {
-  randomInt = getRandomInt(1, 5);
+function togglePopupBtn(btn) {
+  btn.classList.toggle(`${btn.id}_opened`);
+}
+
+function toggleContentVisibility() {
+  content.classList.toggle("content_invisible");
+}
+
+function changeCardSidesBack(cardSides) {
+  const randomCardBackNum = getRandomInt(1, 5);
   cardSides.forEach((element) => {
-    element.style.backgroundImage = `url(./images/back/back${randomInt}.png)`;
+    element.style.backgroundImage = `url(./images/back/back${randomCardBackNum}.png)`;
   });
 }
 
-function toggleCardSide(card, cardSides) {
-  card.classList.toggle("card_rotated");
+function rotateCard(cardSides) {
   cardSides.forEach((side) => side.classList.toggle("card__side_visible"));
 }
 
-function rotateCard() {
-  toggleCardSide(card, cardSides);
-  removeFocus();
-}
-
-function setDefaultCardSide(card, cardSides) {
-  card.classList.remove("card_rotated");
+function setDefaultCardSide(cardSides) {
   cardSides[0].classList.add("card__side_visible");
   cardSides[1].classList.remove("card__side_visible");
 }
 
-function moveCardFocus(element) {
+function moveCardFocus(element, cardSides, cardFocus) {
   if (
     !element.closest(".card__side").classList.contains("card__side_visible")
   ) {
-    toggleCardSide(card, cardSides);
+    rotateCard(cardSides);
   }
 
   cardFocus.classList.add("card__focus_active");
@@ -100,7 +103,7 @@ function moveCardFocus(element) {
   `;
 }
 
-function removeFocus() {
+function removeCardFocus(cardFocus) {
   cardFocus.classList.remove("card__focus_active");
   cardFocus.style.cssText = "";
 }
@@ -110,19 +113,35 @@ function findElementWithSameData(arr, element, key) {
   return result;
 }
 
-function focusCardElement(element) {
-  let formField = findElementWithSameData(formFields, element, "focus");
-  formField.focus();
-  moveCardFocus(element);
+function stopTypingNotInt(e) {
+  e.target.value = e.target.value.replace(/[^0-9.]/g, "");
 }
 
-function focusFormField(field) {
-  let cardElement = findElementWithSameData(
-    focusableCardElements,
-    field,
-    "focus"
-  );
-  moveCardFocus(cardElement);
+function stopTypingNotLetter(e) {
+  e.target.value = e.target.value.replace(/[^a-zA-Z\s.]/g, "");
+}
+
+function identifyBank(num) {
+  const userCardNum = num.length > 5 ? +num : 481776;
+  const cardInfo = new CardInfo(userCardNum, {
+    banksLogosPath: "./node_modules/card-info/dist/banks-logos/",
+    brandsLogosPath: "./node_modules/card-info/dist/brands-logos/",
+    brandLogoPolicy: "white",
+  });
+
+  newCardBankLogos.forEach((logo) => {
+    logo.src =
+      cardInfo.bankLogo ||
+      "./node_modules/card-info/dist/banks-logos/ru-sberbank.svg";
+    logo.alt = cardInfo.bankName || "Sberbank";
+  });
+
+  newCardPaymentLogos.forEach((logo) => {
+    logo.src =
+      cardInfo.brandLogo ||
+      "./node_modules/card-info/dist/brands-logos/visa-white.svg";
+    logo.alt = cardInfo.brandName || "Visa";
+  });
 }
 
 function createNameItem(letter) {
@@ -133,54 +152,31 @@ function createNameItem(letter) {
   return cardHolderNameItem;
 }
 
-function identifyBank(num) {
-  let userCardNum = num.length > 5 ? +num : 481776;
-  const cardInfo = new CardInfo(userCardNum, {
-    banksLogosPath: "./node_modules/card-info/dist/banks-logos/",
-    brandsLogosPath: "./node_modules/card-info/dist/brands-logos/",
-    brandLogoPolicy: "white",
-  });
-
-  cardBankLogos.forEach((logo) => {
-    logo.src = cardInfo.bankLogo
-      ? cardInfo.bankLogo
-      : "./node_modules/card-info/dist/banks-logos/ru-sberbank.svg";
-    logo.alt = cardInfo.bankName ? cardInfo.bankName : "Sberbank";
-  });
-
-  cardPaymentLogos.forEach((logo) => {
-    logo.src = cardInfo.brandLogo
-      ? cardInfo.brandLogo
-      : "./node_modules/card-info/dist/brands-logos/visa-white.svg";
-    logo.alt = cardInfo.brandName ? cardInfo.brandName : "Visa";
-  });
-}
-
-function resetPopupInfo() {
-  cardNumberItems.forEach((i) => (i.textContent = "#"));
-  cardValidDateItems[0].textContent = "mm";
-  cardValidDateItems[1].textContent = "yy";
-  cardHolderName.textContent = "full name";
-  cardCvvNumber.textContent = "";
-  cardBankLogos.forEach((logo) => {
+function resetPopupCardAdd() {
+  newCardNumberItems.forEach((i) => (i.textContent = "#"));
+  newCardValidDateItems[0].textContent = "mm";
+  newCardValidDateItems[1].textContent = "yy";
+  newCardHolderName.textContent = "full name";
+  newCardCvvNumber.textContent = "";
+  newCardBankLogos.forEach((logo) => {
     logo.src = "./node_modules/card-info/dist/banks-logos/ru-sberbank.svg";
     logo.alt = "Sberbank";
   });
 
-  cardPaymentLogos.forEach((logo) => {
+  newCardPaymentLogos.forEach((logo) => {
     logo.src = "./node_modules/card-info/dist/brands-logos/visa-white.svg";
     logo.alt = "Visa";
   });
-  form.reset();
+  formCardAdd.reset();
 }
 
 function cloneCard() {
-  const cloneCard = document.importNode(card, true);
+  const cloneCard = document.importNode(newCard, true);
   const cloneCardSides = cloneCard.querySelectorAll(".card__side");
   const cloneCardFocus = cloneCard.querySelector(".card__focus");
   const btnTrash = document.createElement("button");
 
-  setDefaultCardSide(cloneCard, cloneCardSides);
+  setDefaultCardSide(cloneCardSides);
 
   cloneCardFocus.remove();
 
@@ -195,76 +191,94 @@ function cloneCard() {
   cloneCardSides[0].prepend(btnTrash);
 
   cloneCardSides.forEach((side) => {
-    side.addEventListener("click", () =>
-      toggleCardSide(cloneCard, cloneCardSides)
-    );
+    side.addEventListener("click", () => rotateCard(cloneCardSides));
   });
 
   return cloneCard;
 }
 
-function submitForm(e) {
+function submitFormCardAdd(e) {
   e.preventDefault();
-  removeFocus();
-  setDefaultCardSide(card, cardSides);
-  togglePopup();
+  removeCardFocus(newCardFocus);
+  setDefaultCardSide(newCardSides);
+  togglePopup(popupCardAdd);
+  togglePopupBtn(btnPopupCardAdd);
+  toggleContentVisibility();
 
   setTimeout(() => {
-    resetPopupInfo();
-    changeCardSidesBack();
+    resetPopupCardAdd();
+    changeCardSidesBack(newCardSides);
   }, 800);
 
   wallet.prepend(cloneCard());
 }
 
-btnPopup.addEventListener("click", () => {
-  togglePopup();
+btnPopupCardAdd.addEventListener("click", () => {
+  if (!popupCardAdd.classList.value.includes("popup_opened")) {
+    changeCardSidesBack(newCardSides);
+  }
+  toggleContentVisibility();
+  togglePopup(popupCardAdd);
+  togglePopupBtn(btnPopupCardAdd);
 
   setTimeout(() => {
-    removeFocus();
-    setDefaultCardSide(card, cardSides);
-    resetPopupInfo();
-    if (popup.classList.value.includes("popup_closed")) {
-      changeCardSidesBack();
-    }
+    removeCardFocus(newCardFocus);
+    setDefaultCardSide(newCardSides);
+    resetPopupCardAdd();
   }, 800);
 });
 
-cardSides.forEach((side) => {
-  changeCardSidesBack();
+changeCardSidesBack(newCardSides);
+
+newCardSides.forEach((side) =>
   side.addEventListener("click", (e) => {
-    if (e.target == e.currentTarget) {
-      rotateCard();
+    if (
+      !notRotatedElemetsClassNamesList.some((className) =>
+        e.target.classList.contains(className)
+      )
+    ) {
+      removeCardFocus(newCardFocus);
+      rotateCard(newCardSides);
     }
+  })
+);
+
+focusableCardElements.forEach((element) => {
+  element.addEventListener("click", () => {
+    const formField = findElementWithSameData(
+      formCardAddFields,
+      element,
+      "focus"
+    );
+    moveCardFocus(element, newCardSides, newCardFocus);
+    formField.focus();
   });
 });
 
-rotaryElements.forEach((element) => {
-  element.addEventListener("click", rotateCard);
+formCardAddFields.forEach((field) => {
+  field.addEventListener("focus", () => {
+    const cardElement = findElementWithSameData(
+      focusableCardElements,
+      field,
+      "focus"
+    );
+    moveCardFocus(cardElement, newCardSides, newCardFocus);
+  });
 });
 
-focusableCardElements.forEach((element) => {
-  element.addEventListener("click", () => focusCardElement(element));
-});
-
-formFields.forEach((field) => {
-  field.addEventListener("focus", () => focusFormField(field));
-});
-
-popup.addEventListener("click", (e) => {
+popupCardAdd.addEventListener("click", (e) => {
   if (e.target === e.currentTarget) {
-    removeFocus();
+    removeCardFocus(newCardFocus);
   }
 });
 
-// события для инпутов формы
 inputCardNumber.addEventListener("input", (e) => {
+  stopTypingNotInt(e);
   let inputValue = e.target.value;
-  let cardNumberArr = Array.from(cardNumberItems);
 
   identifyBank(inputValue);
 
-  cardNumberArr.map((n, index, arr) => {
+  newCardNumberItems.map((n, index) => {
     if (
       n.textContent !== inputValue[index] &&
       (inputValue[index] ||
@@ -279,38 +293,23 @@ inputCardNumber.addEventListener("input", (e) => {
   });
 });
 
-[selectCardMonth, selectCardYear].forEach((select, index) => {
-  select.addEventListener("change", (e) => {
-    let inputValue = e.target.value;
-
-    cardValidDateItems[index].classList.add("card__valid-date-item_active");
-
-    setTimeout(() => {
-      cardValidDateItems[index].classList.remove(
-        "card__valid-date-item_active"
-      );
-      cardValidDateItems[index].textContent =
-        inputValue.length === 4 ? inputValue.slice(2) : inputValue;
-    }, 200);
-  });
-});
-
 inputCardHolder.addEventListener("input", (e) => {
-  let inputValue = e.target.value;
+  stopTypingNotLetter(e);
+  const inputValue = e.target.value;
   let nameItem;
-  let cardNameArr = Array.from(
-    cardHolderName.querySelectorAll(".card__holder-name-item")
+  const cardNameArr = Array.from(
+    newCardHolderName.querySelectorAll(".card__holder-name-item")
   ).map((i) => i.textContent);
 
-  if (inputValue.length > 0 && cardHolderName.textContent === "full name") {
-    cardHolderName.textContent = "";
+  if (inputValue.length > 0 && newCardHolderName.textContent === "full name") {
+    newCardHolderName.textContent = "";
   }
 
   if (e.inputType !== "deleteContentBackward") {
     for (let i = 0; i < inputValue.length; i++) {
       if (cardNameArr[i] !== inputValue[i]) {
         nameItem = createNameItem(inputValue[i]);
-        cardHolderName.append(nameItem);
+        newCardHolderName.append(nameItem);
       }
     }
   } else if (
@@ -319,19 +318,35 @@ inputCardHolder.addEventListener("input", (e) => {
   ) {
     cardNameArr.forEach((letter, index) => {
       if (letter !== inputValue[index]) {
-        cardHolderName.removeChild(cardHolderName.lastChild);
+        newCardHolderName.removeChild(newCardHolderName.lastChild);
       }
     });
   } else {
-    cardHolderName.textContent = "full name";
+    newCardHolderName.textContent = "full name";
   }
 });
 
-inputCardCvv.addEventListener("input", (e) => {
-  cardCvvNumber.textContent = e.target.value.replace(/[\s\S]/g, "*");
+[selectCardMonth, selectCardYear].forEach((select, index) => {
+  select.addEventListener("change", (e) => {
+    const inputValue = e.target.value;
+
+    newCardValidDateItems[index].classList.add("card__valid-date-item_active");
+
+    setTimeout(() => {
+      newCardValidDateItems[index].classList.remove(
+        "card__valid-date-item_active"
+      );
+      newCardValidDateItems[index].textContent =
+        inputValue.length === 4 ? inputValue.slice(2) : inputValue;
+    }, 200);
+  });
 });
-//
 
-btnFormReset.addEventListener("click", resetPopupInfo);
+inputCardCvv.addEventListener("input", (e) => {
+  stopTypingNotInt(e);
+  newCardCvvNumber.textContent = e.target.value.replace(/[\s\S]/g, "*");
+});
 
-form.addEventListener("submit", submitForm);
+btnResetFormCardAdd.addEventListener("click", resetPopupCardAdd);
+
+formCardAdd.addEventListener("submit", submitFormCardAdd);

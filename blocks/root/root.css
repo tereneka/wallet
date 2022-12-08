@@ -1,4 +1,6 @@
 .root {
+  width: 100%;
+  max-width: 100%;
   font-family: "Poppins", sans-serif;
   background-color: var(--additional-light);
   box-sizing: border-box;

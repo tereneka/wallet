@@ -1,5 +1,8 @@
 .card__payment-system-logo {
   height: 40px;
+  width: 20%;
+  object-fit: contain;
+  object-position: right center;
 }
 
 @media screen and (max-width: 500px) {

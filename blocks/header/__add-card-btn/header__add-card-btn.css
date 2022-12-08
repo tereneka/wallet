@@ -1,4 +1,4 @@
-.header__popup-btn {
+.header__add-card-btn {
   width: 40px;
   height: 40px;
   background-color: var(--main-dark);
@@ -9,6 +9,5 @@
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
-  transform: rotateZ(45deg);
   transition: all 0.8s ease-in-out;
 }

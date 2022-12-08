@@ -2,9 +2,9 @@
   font-size: 20px;
   font-weight: 500;
   margin: 40px auto 30px;
-  display: flex;
-  justify-content: center;
   width: max-content;
+  letter-spacing: -4px;
+  text-align: center;
 }
 
 @media screen and (max-width: 500px) {
