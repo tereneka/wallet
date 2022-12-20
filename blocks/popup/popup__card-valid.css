@@ -1,0 +1,7 @@
+.popup__card-valid {
+  width: 45%;
+}
+
+.popup__card-valid .popup__form-field {
+  width: 100%;
+}

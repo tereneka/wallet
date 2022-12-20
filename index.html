@@ -84,24 +84,29 @@
     </div>
 
     <div class="popup__form-container">
-      <form class="popup__form" name="cardAdd" method="post">
+      <form class="popup__form" name="cardAdd" method="post" novalidate>
         <label class="popup__form-label">
           number
-          <input class="popup__form-field popup__form-field_size_l" type="text" data-focus="cardNumber"
-            name="cardNumber" minlength="16" maxlength="16" required inputmode="numeric">
+          <input class="popup__form-field popup__form-field_size_l" id="card-number" type="text" data-focus="cardNumber"
+            data-valid-type='digits' name="cardNumber" minlength="16" maxlength="16" required inputmode="numeric">
+          <span class="popup__form-error card-number-error"></span>
+          <span class="popup__form-error card-number-type-error"></span>
         </label>
 
         <label class="popup__form-label">
           full name
-          <input class="popup__form-field popup__form-field_size_l" type="text" data-focus="cardHolder"
-            name="cardHolder" required>
+          <input class="popup__form-field popup__form-field_size_l" id="card-holder" type="text" data-focus="cardHolder"
+            data-valid-type='latin alphabets' name="cardHolder" required>
+          <span class="popup__form-error card-holder-error"></span>
+          <span class="popup__form-error card-holder-type-error"></span>
         </label>
 
-        <div class="popup__form-fields-container">
-          <fieldset class="popup__form-fieldset">
-            <legend class="popup__form-label">valid thru</legend>
+        <fieldset class="popup__form-fieldset">
+          <legend class="popup__form-label"> valid thru</legend>
 
-            <select class="popup__form-field popup__form-field_size_s" data-focus="cardValid" name="cardMonth" required>
+          <div class="popup__card-valid">
+            <select class="popup__form-field popup__form-field_size_s" id="card-month" data-focus="cardValid"
+              name="cardMonth" required>
               <option value="" disabled selected>month</option>
               <option value="01">01</option>
               <option value="02">02</option>
@@ -116,8 +121,12 @@
               <option value="11">11</option>
               <option value="12">12</option>
             </select>
+            <span class="popup__form-error card-month-error"></span>
+          </div>
 
-            <select class="popup__form-field popup__form-field_size_s" data-focus="cardValid" name="cardYear" required>
+          <div class="popup__card-valid">
+            <select class="popup__form-field popup__form-field_size_s" id="card-year" data-focus="cardValid"
+              name="cardYear" required>
               <option value="" disabled selected>year</option>
               <option value="2022">2022</option>
               <option value="2023">2023</option>
@@ -131,18 +140,22 @@
               <option value="2031">2031</option>
               <option value="2032">2032</option>
             </select>
-          </fieldset>
+            <span class="popup__form-error card-year-error"></span>
+          </div>
 
-          <label class="popup__form-label">
-            cvv<br>
-            <input class="popup__form-field popup__form-field_size_s" type="password" data-focus="cardCvv"
-              name="cardCvv" required minlength="3" maxlength="3" inputmode="numeric">
-          </label>
-        </div>
+        </fieldset>
+
+        <label class="popup__form-label">
+          cvv<br>
+          <input class="popup__form-field popup__form-field_size_s" id="card-cvv" type="password" data-focus="cardCvv"
+            data-valid-type='digits' name="cardCvv" required minlength="3" maxlength="3" inputmode="numeric">
+          <span class="popup__form-error card-cvv-error"></span>
+          <span class="popup__form-error card-cvv-type-error"></span>
+        </label>
 
         <div class="popup__btn-group">
           <button class="popup__form-btn popup__form-btn_type_reset" type="reset">reset</button>
-          <button class="popup__form-btn" type="submit">submit</button>
+          <button class="popup__form-btn popup__form-btn_type_submit" type="submit">submit</button>
         </div>
       </form>
     </div>

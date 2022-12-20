@@ -21,13 +21,14 @@
 @import url(./blocks/popup/popup__form-container.css);
 @import url(./blocks/popup/popup__form.css);
 @import url(./blocks/popup/popup__form-label.css);
-@import url(./blocks/popup/popup__form-fields-container.css);
 @import url(./blocks/popup/__form-field/popup__form-field.css);
 @import url(./blocks/popup/__form-field/_size/popup__form-field_size_l.css);
 @import url(./blocks/popup/__form-field/_size/popup__form-field_size_s.css);
 @import url(./blocks/popup/popup__form-fieldset.css);
 @import url(./blocks/popup/popup__btn-group.css);
 @import url(./blocks/popup/popup__form-btn.css);
+@import url(./blocks/popup/popup__card-valid.css);
+@import url(./blocks/popup/popup__form-error.css);
 
 @import url(./blocks/card/card.css);
 @import url(./blocks/card/__focus/card__focus.css);

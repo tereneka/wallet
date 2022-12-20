@@ -1,4 +1,5 @@
-import { notRotatedElemetsClassNamesList } from "./data.js";
+import { notRotatedElemetsClassNamesList, formConfig } from "./data.js";
+import FormValidator from "./FormValidator.js";
 
 const content = document.querySelector(".content");
 
@@ -34,6 +35,7 @@ const focusableCardElements = [
 ];
 
 const formCardAdd = popupCardAdd.querySelector(".popup__form");
+const formCardAddValidator = new FormValidator(formConfig, formCardAdd);
 const inputCardNumber = formCardAdd.querySelector("[name='cardNumber']");
 const inputCardHolder = formCardAdd.querySelector("[name='cardHolder']");
 const selectCardMonth = formCardAdd.querySelector("[name='cardMonth']");
@@ -113,14 +115,6 @@ function findElementWithSameData(arr, element, key) {
   return result;
 }
 
-function stopTypingNotInt(e) {
-  e.target.value = e.target.value.replace(/[^0-9.]/g, "");
-}
-
-function stopTypingNotLetter(e) {
-  e.target.value = e.target.value.replace(/[^a-zA-Z\s.]/g, "");
-}
-
 function identifyBank(num) {
   const userCardNum = num.length > 5 ? +num : 481776;
   const cardInfo = new CardInfo(userCardNum, {
@@ -168,6 +162,9 @@ function resetPopupCardAdd() {
     logo.alt = "Visa";
   });
   formCardAdd.reset();
+  formCardAddFields.forEach((field) => {
+    formCardAddValidator.hideFieldError(field);
+  });
 }
 
 function cloneCard() {
@@ -199,18 +196,24 @@ function cloneCard() {
 
 function submitFormCardAdd(e) {
   e.preventDefault();
-  removeCardFocus(newCardFocus);
-  setDefaultCardSide(newCardSides);
-  togglePopup(popupCardAdd);
-  togglePopupBtn(btnPopupCardAdd);
-  toggleContentVisibility();
+  if (!formCardAddValidator.isFormInvalid()) {
+    removeCardFocus(newCardFocus);
+    setDefaultCardSide(newCardSides);
+    togglePopup(popupCardAdd);
+    togglePopupBtn(btnPopupCardAdd);
+    toggleContentVisibility();
 
-  setTimeout(() => {
-    resetPopupCardAdd();
-    changeCardSidesBack(newCardSides);
-  }, 800);
+    setTimeout(() => {
+      resetPopupCardAdd();
+      changeCardSidesBack(newCardSides);
+    }, 800);
 
-  wallet.prepend(cloneCard());
+    wallet.prepend(cloneCard());
+  } else {
+    formCardAddFields.forEach((field) => {
+      formCardAddValidator.checkFieldValidity(field);
+    });
+  }
 }
 
 btnPopupCardAdd.addEventListener("click", () => {
@@ -273,7 +276,7 @@ popupCardAdd.addEventListener("click", (e) => {
 });
 
 inputCardNumber.addEventListener("input", (e) => {
-  stopTypingNotInt(e);
+  formCardAddValidator.checkInputDataType(e);
   let inputValue = e.target.value;
 
   identifyBank(inputValue);
@@ -294,7 +297,7 @@ inputCardNumber.addEventListener("input", (e) => {
 });
 
 inputCardHolder.addEventListener("input", (e) => {
-  stopTypingNotLetter(e);
+  formCardAddValidator.checkInputDataType(e);
   const inputValue = e.target.value;
   let nameItem;
   const cardNameArr = Array.from(
@@ -343,10 +346,12 @@ inputCardHolder.addEventListener("input", (e) => {
 });
 
 inputCardCvv.addEventListener("input", (e) => {
-  stopTypingNotInt(e);
+  formCardAddValidator.checkInputDataType(e);
   newCardCvvNumber.textContent = e.target.value.replace(/[\s\S]/g, "*");
 });
 
 btnResetFormCardAdd.addEventListener("click", resetPopupCardAdd);
 
 formCardAdd.addEventListener("submit", submitFormCardAdd);
+
+formCardAddValidator.enableValidation();

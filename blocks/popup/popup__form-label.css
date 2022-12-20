@@ -5,3 +5,11 @@
   text-transform: uppercase;
   display: block;
 }
+
+.popup__form-label::before {
+  content: "*";
+  display: inline-block;
+  color: var(--error);
+  font-size: 16px;
+  vertical-align: middle;
+}

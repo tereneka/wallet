@@ -12,5 +12,12 @@ export const notRotatedElemetsClassNamesList = [
   "card__cvv-number",
 ];
 
-// oninput =
-//   "this.value = this.value.replace(/[^0-9.]/g, '').replace(/(..*)./g, '$1');";
+export const formConfig = {
+  formSelector: ".popup__form",
+  fieldSelector: ".popup__form-field",
+};
+
+export const formValidDataTypes = {
+  digits: /[^0-9.]/g,
+  "latin alphabets": /[^a-zA-Z\s.]/g,
+};
