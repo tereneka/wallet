@@ -53,7 +53,6 @@ const formCardAddFields = [
 ];
 
 const wallet = document.querySelector(".wallet");
-const walletCardList = wallet.querySelectorAll(".card");
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
