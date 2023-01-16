@@ -1,13 +1,12 @@
-import { formValidDataTypes } from "./data.js";
-
 export default class FormValidator {
-  constructor(formConfig, form) {
-    this._formSelector = formConfig.formSelector;
-    this._fieldSelector = formConfig.fieldSelector;
+  static dataTypes = {
+    digits: /[^0-9.]/g,
+    "latin alphabets": /[^a-zA-Z\s.]/g,
+  };
+
+  constructor(form, fieldsList) {
     this._form = form;
-    this._fieldList = Array.from(
-      this._form.querySelectorAll(this._fieldSelector)
-    );
+    this._fieldsList = fieldsList;
   }
 
   _showFieldError(field, errorMessage) {
@@ -16,7 +15,7 @@ export default class FormValidator {
     field.setAttribute("invalid", "invalid");
   }
 
-  hideFieldError(field) {
+  _hideFieldError(field) {
     const fieldError = this._form.querySelector(`.${field.id}-error`);
     fieldError.textContent = "";
     field.removeAttribute("invalid");
@@ -37,12 +36,12 @@ export default class FormValidator {
     if (errorMessage) {
       this._showFieldError(field, errorMessage);
     } else {
-      this.hideFieldError(field);
+      this._hideFieldError(field);
     }
   }
 
   checkInputDataType(e) {
-    const reg = formValidDataTypes[e.target.dataset.validType];
+    const reg = FormValidator.dataTypes[e.target.dataset.validType];
     const inputTypeError = document.querySelector(`.${e.target.id}-type-error`);
 
     inputTypeError.textContent = reg.test(e.target.value)
@@ -53,13 +52,13 @@ export default class FormValidator {
   }
 
   isFormInvalid() {
-    return this._fieldList.some(
+    return this._fieldsList.some(
       (field) => !field.validity.valid || field.hasAttribute("invalid")
     );
   }
 
-  _checkFormValidity() {
-    this._fieldList.forEach((field) => {
+  _setEventListeners() {
+    this._fieldsList.forEach((field) => {
       field.addEventListener("input", () => {
         this.checkFieldValidity(field);
       });
@@ -67,6 +66,12 @@ export default class FormValidator {
   }
 
   enableValidation() {
-    this._checkFormValidity();
+    this._setEventListeners();
+  }
+
+  resetValidation() {
+    this._fieldsList.forEach((field) => {
+      this._hideFieldError(field);
+    });
   }
 }

@@ -1,5 +1,23 @@
 {
+  "name": "wallet",
+  "version": "1.0.0",
+  "description": "Проект Wallet - приложение для добавления и хранения банковских карт.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tereneka/wallet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tereneka/wallet/issues"
+  },
+  "homepage": "https://github.com/tereneka/wallet#readme",
   "dependencies": {
-    "card-info": "^1.0.1"
+    "card-info": "^1.2.4"
   }
 }

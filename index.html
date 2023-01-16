@@ -21,67 +21,6 @@
     <section class="wallet"></section>
   </main>
   <div class="popup popup_opened">
-    <div class="card">
-      <div class="card__focus"></div>
-      <div class="card__side card__side_type_front card__side_visible">
-        <img class="card__bank-logo" src="./node_modules/card-info/dist/banks-logos/ru-sberbank.svg" alt="Sberbank">
-
-        <p class="card__number" data-focus="cardNumber">
-          <span class="card__number-item">#</span>
-          <span class="card__number-item">#</span>
-          <span class="card__number-item">#</span>
-          <span class="card__number-item">#</span>
-
-          <span class="card__number-item">#</span>
-          <span class="card__number-item">#</span>
-          <span class="card__number-item">#</span>
-          <span class="card__number-item">#</span>
-
-          <span class="card__number-item">#</span>
-          <span class="card__number-item">#</span>
-          <span class="card__number-item">#</span>
-          <span class="card__number-item">#</span>
-
-          <span class="card__number-item">#</span>
-          <span class="card__number-item">#</span>
-          <span class="card__number-item">#</span>
-          <span class="card__number-item">#</span>
-        </p>
-
-        <div class="card__valid" data-focus="cardValid">
-          <p class="card__label">valid<br>thru</p>
-          <p class="card__valid-date">
-            <span class="card__valid-date-item">MM</span> /
-            <span class="card__valid-date-item">YY</span>
-          </p>
-        </div>
-
-        <div class="card__block">
-          <div class="card__holder" data-focus="cardHolder">
-            <p class="card__label">card holder</p>
-            <p class="card__holder-name">full name</p>
-          </div>
-
-          <img class="card__payment-system-logo" src="./node_modules/card-info/dist/brands-logos/visa-white.svg"
-            alt="Visa">
-        </div>
-      </div>
-
-      <div class="card__side card__side_type_back">
-        <div class="card__black-line"></div>
-
-        <div class="card__cvv" data-focus="cardCvv">
-          <p class="card__label">cvv</p>
-          <p class="card__cvv-number"></p>
-        </div>
-
-        <div class="card__block card__block_for_logos">
-          <img class="card__bank-logo" src="./node_modules/card-info/dist/banks-logos/ru-sberbank.svg" alt="Sberbank">
-          <img class="card__payment-system-logo" src="./node_modules/card-info/dist/brands-logos/visa-white.svg"
-            alt="Visa">
-        </div>
-      </div>
-    </div>
 
     <div class="popup__form-container">
       <form class="popup__form" name="cardAdd" method="post" novalidate>
@@ -162,11 +101,71 @@
 
   </div>
 
-  <template id="holder-name-item">
-    <span class="card__holder-name-item"></span>
+  <template id="card-template">
+    <div class="card">
+      <div class="card__focus"></div>
+      <div class="card__side card__side_type_front card__side_visible">
+        <img class="card__bank-logo" src="./node_modules/card-info/dist/banks-logos/ru-sberbank.svg" alt="Sberbank">
+
+        <p class="card__number" data-focus="cardNumber">
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+          <span class="card__number-item">#</span>
+        </p>
+
+        <div class="card__valid" data-focus="cardValid">
+          <p class="card__label">valid<br>thru</p>
+          <p class="card__valid-date">
+            <span class="card__valid-date-item">MM</span> /
+            <span class="card__valid-date-item">YY</span>
+          </p>
+        </div>
+
+        <div class="card__block">
+          <div class="card__holder" data-focus="cardHolder">
+            <p class="card__label">card holder</p>
+            <p class="card__holder-name">full name</p>
+          </div>
+
+          <img class="card__payment-system-logo" src="./node_modules/card-info/dist/brands-logos/visa-white.svg"
+            alt="Visa">
+        </div>
+      </div>
+
+      <div class="card__side card__side_type_back">
+        <div class="card__black-line"></div>
+
+        <div class="card__cvv" data-focus="cardCvv">
+          <p class="card__label">cvv</p>
+          <p class="card__cvv-number"></p>
+        </div>
+
+        <div class="card__block card__block_for_logos">
+          <img class="card__bank-logo" src="./node_modules/card-info/dist/banks-logos/ru-sberbank.svg" alt="Sberbank">
+          <img class="card__payment-system-logo" src="./node_modules/card-info/dist/brands-logos/visa-white.svg"
+            alt="Visa">
+        </div>
+      </div>
+    </div>
   </template>
 
-  <script src="./node_modules/card-info/dist/card-info.min.js"></script>
+  <!-- <script src="./node_modules/card-info/dist/card-info.min.js"></script> -->
   <script src="./scripts/index.js" type="module"></script>
 
 </body>

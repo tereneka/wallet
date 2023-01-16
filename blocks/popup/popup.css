@@ -15,4 +15,5 @@
   opacity: 0;
   overflow: hidden;
   animation: moveRight 0.8s ease-in-out;
+  z-index: 10;
 }
