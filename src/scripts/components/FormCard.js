@@ -1,7 +1,7 @@
 import Card from "./Card.js";
 import { findElementWithSameData, getRandomInt } from "../utils.js";
 import { cardBackList } from "../data.js";
-import "../../node_modules/card-info/dist/card-info.min.js";
+import "card-info/dist/card-info.min.js";
 
 export default class FormCard extends Card {
   static notRotatedElemetsClassNamesList = [
