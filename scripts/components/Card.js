@@ -51,9 +51,6 @@ export default class Card {
     this._cardHolderName = this._cardHolder.querySelector(
       Card.selectors.holderName
     );
-    this._cardHolderNameItems = [
-      ...this._cardHolderName.querySelectorAll(Card.selectors.holderNameItem),
-    ];
     this._cardCvv = this._cardElement.querySelector(Card.selectors.cvv);
     this._cardCvvNumber = this._cardCvv.querySelector(Card.selectors.cvvNumber);
   }

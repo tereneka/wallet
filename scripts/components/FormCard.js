@@ -130,7 +130,9 @@ export default class FormCard extends Card {
   setCardHolderName(e) {
     const inputValue = e.target.value;
     let nameItem;
-    const cardNameArr = this._cardHolderNameItems.map((i) => i.textContent);
+    const cardNameArr = [
+      ...this._cardHolderName.querySelectorAll(Card.selectors.holderNameItem),
+    ].map((i) => i.textContent);
 
     if (
       inputValue.length > 0 &&
@@ -156,7 +158,7 @@ export default class FormCard extends Card {
         }
       });
     } else {
-      this.cardHolderName.textContent = "full name";
+      this._cardHolderName.textContent = "full name";
     }
   }
 
