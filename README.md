@@ -12,5 +12,6 @@
 - файловая структура БЭМ flex
 - JavaScript
 - DOM
+- ООП
 
 [посмотреть проект можно здесь](https://tereneka.github.io/wallet/index.html)
